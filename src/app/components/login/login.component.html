@@ -1,0 +1,31 @@
+<div class="wrapper background">
+  <div *ngIf="!loading" class="background-overlay">
+    <div class="container my-5 mx-4">
+      <div class="container-img">
+        <img src="assets/images/logoShoopmyDark.png">
+      </div>
+      <h1 class="text-center py-5 font-weight-bold">Inicio de sesión</h1>
+      <form (ngSubmit)="login()" [formGroup]="loginUsuario">
+        <div class="form-group mb-3 ">
+          <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" formControlName="correoElectronico" placeholder="example@email.com">
+        </div>
+        <div class="form-group mb-3">
+          <label for="exampleInputPassword1" class="form-label" >Contraseña</label>
+          <input type="password" class="form-control text-white" id="exampleInputPassword1" formControlName="contrasena" placeholder="***********" autocomplete="nope">
+        </div>
+        <div class="d-grid m-5">
+          <button type="submit" class="btn btn-warning btn-lg fw-normal">Ingresar</button>
+        </div>
+        <div class="px-5 py-4 text-light text-center">
+          <p>Olvidaste tú contraseña? <a routerLink="/recoverPassword" class="link-warning"> Recuperar contraseña</a></p>
+          <p>No tienes cuenta?<a routerLink="/register" class="link-warning"> Crear cuenta</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-spinner *ngIf="loading"></app-spinner>
+</div>
+
+
+

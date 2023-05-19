@@ -1,0 +1,36 @@
+<div class="wrapper background">
+  <div *ngIf="!loading" class="background-overlay">
+    <div class="container my-5 mx-4">
+      <div class="container-img">
+        <img src="assets/images/logoShoopmyDark.png">
+      </div>
+      <h1 class="text-center pt-5 font-weight-bold">Crear cuenta</h1>
+      <h6 class="text-center text-secondary">Ingresa tus datos para crear una cuenta y acceder al sistema.</h6>
+      <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
+        <div class="form-group mb-3 ">
+          <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" formControlName="correoElectronico" placeholder="example@email.com">
+          <span *ngIf="registrarUsuario.get('correoElectronico')?.hasError('required') && registrarUsuario.get('correoElectronico')?.touched" class="text-danger errorLabel"><strong>*El correo es requerido</strong></span>
+          <span *ngIf="registrarUsuario.get('correoElectronico')?.hasError('email') && registrarUsuario.get('email')?.touched" class="text-danger errorLabel"><strong>*El correo es invalido</strong></span>
+        </div>
+        <div class="form-group mb-3">
+          <label for="exampleInputPassword1" class="form-label" >Contraseña</label>
+          <input type="password" class="form-control text-white" id="exampleInputPassword1" formControlName="contrasena" placeholder="***********" autocomplete="nope">
+          <span *ngIf="registrarUsuario.get('contrasena')?.hasError('required') && registrarUsuario.get('contrasena')?.touched" class="text-danger errorLabel"><strong>*La contraseña es requerida</strong></span>
+          <span *ngIf="registrarUsuario.get('contrasena')?.hasError('minlength') && registrarUsuario.get('contrasena')?.touched" class="text-danger errorLabel"><strong>*La contraseña debe tener más de 6 caracteres</strong></span>
+        </div>
+        <div class="form-group mb-3">
+          <label for="exampleInputPassword1" class="form-label" >Repetir contraseña</label>
+          <input type="password" class="form-control text-white" id="exampleInputPassword1" formControlName="confirmarContrasena" placeholder="***********" autocomplete="nope">
+        </div>
+        <div class="form-group d-grid mx-5 my-4">
+          <button type="submit" [disabled]="registrarUsuario.invalid" class="btn btn-lg btn-warning" >Enviar</button>
+        </div>
+        <div class="px-5 py-4 text-light text-center">
+          <p>Ya tengo cuenta! <a routerLink="/login" class="link-warning">Iniciar sesión</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-spinner *ngIf="loading"></app-spinner>
+</div>
