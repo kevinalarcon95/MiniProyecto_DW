@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private firebaseError: FirebaseCodeErrorService){
       this.loginUsuario = this.fb.group({
-        correoElectronico: ['', Validators.required],
+        correoElectronico: ['', [Validators.required, Validators.email]],
         contrasena: ['', Validators.required]
       });
     }
@@ -34,8 +34,11 @@ export class LoginComponent implements OnInit {
     const contrasena = this.loginUsuario.value.contrasena;
     this.loading = true;
     this.afAuth.signInWithEmailAndPassword(correoElectronico, contrasena).then((user) => {
-      console.log(user);
-      this.router.navigate(['/dashboard']);
+      if(user.user?.emailVerified){
+        this.router.navigate(['/dashboard']);
+      }else{
+        this.router.navigate(['/verifyMail']);
+      }
     }).catch((error) => {
       this.loading = false;
       console.log(error);

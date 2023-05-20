@@ -9,13 +9,16 @@
         <div class="form-group mb-3 ">
           <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
           <input type="email" class="form-control" id="exampleInputEmail1" formControlName="correoElectronico" placeholder="example@email.com">
+          <span *ngIf="loginUsuario.get('correoElectronico')?.hasError('required') && loginUsuario.get('correoElectronico')?.touched" class="text-danger errorLabel"><strong>*El correo es requerido</strong></span>
+          <span *ngIf="loginUsuario.get('correoElectronico')?.hasError('email') && loginUsuario.get('email')?.touched" class="text-danger errorLabel"><strong>*El correo es invalido</strong></span>
         </div>
         <div class="form-group mb-3">
           <label for="exampleInputPassword1" class="form-label" >Contraseña</label>
           <input type="password" class="form-control text-white" id="exampleInputPassword1" formControlName="contrasena" placeholder="***********" autocomplete="nope">
+          <span *ngIf="loginUsuario.get('contrasena')?.hasError('required') && loginUsuario.get('contrasena')?.touched" class="text-danger errorLabel"><strong>*La contraseña es requerida</strong></span>
         </div>
         <div class="d-grid m-5">
-          <button type="submit" class="btn btn-warning btn-lg fw-normal">Ingresar</button>
+          <button type="submit" class="btn btn-warning btn-lg fw-normal" [disabled]="loginUsuario.invalid">Ingresar</button>
         </div>
         <div class="px-5 py-4 text-light text-center">
           <p>Olvidaste tú contraseña? <a routerLink="/recoverPassword" class="link-warning"> Recuperar contraseña</a></p>

@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   registrar() {
     const correoElectronico = this.registrarUsuario.value.correoElectronico;
@@ -42,14 +42,18 @@ export class RegisterComponent implements OnInit {
     this.afAuth
       .createUserWithEmailAndPassword(correoElectronico, contrasena)
       .then((user) => {
-        this.toastr.success('El usuario fue registrado con exito!', 'Usuario registrado');
-        this.router.navigate(['/login']);
-        console.log(user);
+        this.verificarCorreo();
       })
       .catch((error) => {
         this.loading = false;
         console.log(error);
         this.toastr.error(this.firebaseError.codeError(error.code), 'Error');
       });
+  }
+  verificarCorreo() {
+    this.afAuth.currentUser.then(user => user?.sendEmailVerification()).then(() => {
+      this.toastr.info('Le enviamos un correo electronico para su verificación!', 'Verificar correo');
+      this.router.navigate(['/login']);
+    });
   }
 }

@@ -23,7 +23,7 @@ export class RecoverPasswordComponent implements OnInit {
     private firebaseError: FirebaseCodeErrorService
   ) {
     this.recuperarUsuario = this.fb.group({
-      correoElectronico: ['', Validators.required]
+      correoElectronico: ['', [Validators.required, Validators.email]],
     })
   }
 
