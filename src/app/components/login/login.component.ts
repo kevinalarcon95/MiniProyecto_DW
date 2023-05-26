@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { FirebaseCodeErrorService } from 'src/app/services/firebase-code-error.service';
+import { FirebaseCodeErrorService } from 'src/app/services/firebaseError/firebase-code-error.service';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.afAuth.signInWithEmailAndPassword(correoElectronico, contrasena).then((user) => {
       if(user.user?.emailVerified){
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/containerPrincipal']);
       }else{
         this.router.navigate(['/verifyMail']);
       }

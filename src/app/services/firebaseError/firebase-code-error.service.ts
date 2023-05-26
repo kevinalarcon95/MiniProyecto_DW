@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FirebaseCodeErrorEnum } from '../utils/firebase-code-error';
+import { FirebaseCodeErrorEnum } from '../../utils/firebase-code-error';
 
 @Injectable({
   providedIn: 'root'

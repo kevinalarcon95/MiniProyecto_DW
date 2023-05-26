@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FirebaseCodeErrorService } from './firebase-code-error.service';
+import { FirebaseCodeErrorService } from '../firebaseError/firebase-code-error.service';
 
 describe('FirebaseCodeErrorService', () => {
   let service: FirebaseCodeErrorService;

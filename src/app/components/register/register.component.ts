@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { FirebaseCodeErrorService } from 'src/app/services/firebase-code-error.service';
+import { FirebaseCodeErrorService } from 'src/app/services/firebaseError/firebase-code-error.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

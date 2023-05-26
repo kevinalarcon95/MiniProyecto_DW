@@ -1,0 +1,27 @@
+<div class="d-flex bg-light" id="wrapper">
+    <!-- <app-sidebar></app-sidebar> -->
+    <app-sidebar (optionSelected)="onOptionSelected($event)"></app-sidebar>
+    <div id="page-content-wrapper">
+      <app-navbar></app-navbar>
+      <div [ngSwitch]="receivedOption">
+        <div *ngSwitchCase="'Option 1'">
+          <h2>Vista para la opción 1 usando ngSwitch</h2>
+          <!-- Contenido específico para la opción 1 usando ngSwitch -->
+        </div>
+        <div *ngSwitchCase="'Option 2'">
+          <h2>Vista para la opción 2 usando ngSwitch</h2>
+          <!-- Contenido específico para la opción 2 usando ngSwitch -->
+        </div>
+        <div *ngSwitchCase="'Option 3'">
+          <app-product></app-product>
+          <!-- Contenido específico para la opción 3 usando ngSwitch -->
+        </div>
+        <div *ngSwitchDefault>
+          <h2>Vista predeterminada cuando no hay opción seleccionada</h2>
+          
+          <!-- Contenido predeterminado -->
+        </div>
+    </div>
+  </div>
+  
+  
