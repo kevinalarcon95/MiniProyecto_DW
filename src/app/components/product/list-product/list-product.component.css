@@ -1,0 +1,11 @@
+.container{
+    box-shadow: 0px 0px 6px 0px rgb(183 180 175);
+}
+.table th, td{
+    text-align: center;
+}
+.celda{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
