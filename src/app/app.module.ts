@@ -20,6 +20,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProductComponent } from './components/product/product.component';
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
+import { ListProductComponent } from './components/product/list-product/list-product.component';
 
 
 
@@ -38,6 +39,7 @@ import { CreateProductComponent } from './components/product/create-product/crea
     NavbarComponent,
     ProductComponent,
     CreateProductComponent,
+    ListProductComponent,
   ],
   imports: [
     BrowserModule,
