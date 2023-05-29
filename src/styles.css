@@ -14,11 +14,12 @@ html, body {
 
 #sidebar-wrapper {
   min-height: 100vh;
-
+  z-index: 10;
   -webkit-transition: margin .25s ease-out;
   -moz-transition: margin .25s ease-out;
   -o-transition: margin .25s ease-out;
   transition: margin .25s ease-out;
+  box-shadow: 0px 0px 17px 0px rgb(212 212 212);
 }
 
 #sidebar-wrapper .sidebar-heading {

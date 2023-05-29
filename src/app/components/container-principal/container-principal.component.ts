@@ -13,7 +13,7 @@ export class ContainerPrincipalComponent {
     
     switch (option) {
       case 'Option 1':
-        this.nameOptionSelected('Lista de compras');
+        this.nameOptionSelected('Compras');
         break;
       case 'Option 2':
         this.nameOptionSelected('Productos');

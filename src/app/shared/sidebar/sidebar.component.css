@@ -10,7 +10,7 @@
 
 .list-group-flush>.list-group-item {
     display: flex;
-    justify-content: center;
+    padding-left: 2rem;
     align-items: center;
 }
 
@@ -23,8 +23,8 @@
   
 .container-img  img {
     margin: 0px 0px 0px 0px;
-    width: 12rem;
-    height: 5rem;
+    width: 10rem;
+    height: 4rem;
     object-fit: contain;
     mix-blend-mode: multiply;
     display: flex;

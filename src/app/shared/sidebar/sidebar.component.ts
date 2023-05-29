@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
 
   @HostListener('document:statusChange', ['$event.detail'])
   onStatusChange(status: boolean) {
-    this.status = status;
+    this.status = !status;
     console.log('Estado cambiado:', this.status);
   }
   

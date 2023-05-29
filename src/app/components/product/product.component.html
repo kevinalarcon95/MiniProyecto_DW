@@ -1,15 +1,55 @@
 <div class="container m-4 no-oblicuas">
     <div class="row">
         <div class="col">
-            <h1>Lista de productos</h1>
+            <h2 class="fw-lighter">Lista de productos</h2>
         </div>
         <div class="col d-flex flex-row-reverse">
-            <button type="button" class="btn btn-warning" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#createProductModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-              </svg> Crear</button>
+              </svg> Crear producto
+            </button>
+            <div class="modal fade" id="createProductModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title ms-3"> Crear producto</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container-fluid">
+                        <form action="">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre del producto</label>
+                                <input type="text" class="form-control" placeholder="Ingresa el nombre del producto">
+                              </div>
+                              <div class="mb-3">
+                                <label class="form-label">Precio</label>
+                                <input type="number" class="form-control" placeholder="Ingresa el precio del producto">
+                              </div>
+                            <div class="mb-3">
+                                <label class="form-label">Proveedor</label>
+                                <select class="form-select">
+                                    <option selected>Seleccione un proveedor</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-secondary">Guardar</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
         <app-list-product></app-list-product>
     </div>
 </div>
+  
