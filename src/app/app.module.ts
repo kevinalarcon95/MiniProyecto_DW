@@ -24,7 +24,6 @@ import { ListProductComponent } from './components/product/list-product/list-pro
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
