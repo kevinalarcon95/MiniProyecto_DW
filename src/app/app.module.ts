@@ -21,6 +21,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProductComponent } from './components/product/product.component';
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
 import { ListProductComponent } from './components/product/list-product/list-product.component';
+import { DataServices } from './data.services';
 
 
 
@@ -49,7 +50,7 @@ import { ListProductComponent } from './components/product/list-product/list-pro
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [],
+  providers: [DataServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
