@@ -14,7 +14,7 @@ export class TokenService {
   }
 
   getToken():boolean {
-    return false;
+    return true;
   }
 
   clearToken() {

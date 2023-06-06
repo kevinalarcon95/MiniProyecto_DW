@@ -22,6 +22,9 @@ import { ProductComponent } from './components/product/product.component';
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
 import { ListProductComponent } from './components/product/list-product/list-product.component';
 import { DataServices } from './data.services';
+import { ProviderComponent } from './components/provider/provider.component';
+import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
+import { ListProviderComponent } from './components/provider/list-provider/list-provider.component';
 
 
 
@@ -40,6 +43,9 @@ import { DataServices } from './data.services';
     ProductComponent,
     CreateProductComponent,
     ListProductComponent,
+    ProviderComponent,
+    CreateProviderComponent,
+    ListProviderComponent,
   ],
   imports: [
     BrowserModule,
