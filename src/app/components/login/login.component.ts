@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FirebaseCodeErrorService } from 'src/app/services/firebaseError/firebase-code-error.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private toastr: ToastrService,
+    private token: TokenService,
     private router: Router,
     private firebaseError: FirebaseCodeErrorService
   ) {
@@ -36,7 +38,11 @@ export class LoginComponent implements OnInit {
       this.loading = true;  
       this.auth.login(correoElectronico,contrasena).then((user) =>{
         if (user?.emailVerified) {
-          this.router.navigate(['/containerPrincipal']);
+          this.token.saveResponse(JSON.stringify(user));
+          user.getIdToken().then(data =>{
+            this.token.saveToken(JSON.stringify(data)); 
+            this.router.navigate(['/containerPrincipal']);          
+          })
         } else {
           this.router.navigate(['/verifyMail']);
         }

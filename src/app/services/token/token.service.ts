@@ -9,15 +9,19 @@ export class TokenService {
 
   constructor(private afAuth: AngularFireAuth) { }
 
-  saveToken(token: string) {
-    // your token
+  saveResponse(response: string){
+    sessionStorage.setItem("userLogged", response);
   }
 
-  getToken():boolean {
-    return true;
+  saveToken(token: string) {
+    sessionStorage.setItem("token",token);
+  }
+
+  getToken(): string | null {
+    return sessionStorage.getItem('token');
   }
 
   clearToken() {
-    // your token
+    sessionStorage.clear()
   }
 }

@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit{
   status: boolean = false;
   receivedName: string = '';
 
-  constructor(private afAuth: AngularFireAuth, private Router: Router, private auth: AuthService){}
+  constructor(private afAuth: AngularFireAuth, private Router: Router, private auth: AuthService, private token: TokenService){}
 
   ngOnInit(): void {
     this.afAuth.currentUser.then(user => {
@@ -23,14 +24,11 @@ export class NavbarComponent implements OnInit{
         console.log(user);
         this.clickEvent();
       }
-      // else{
-      //     this.Router.navigate(["/login"]);
-      // }
     })
-    
   }
 
   logout(){
+    this.token.clearToken();
     this.auth.logout().then(() => this.Router.navigate(['/login']));
   }
 
