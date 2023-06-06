@@ -25,7 +25,6 @@ import { DataServices } from './data.services';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

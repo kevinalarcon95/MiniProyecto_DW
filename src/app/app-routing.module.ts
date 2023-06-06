@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { VerifyMailComponent } from './components/verify-mail/verify-mail.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { ContainerPrincipalComponent } from './components/container-principal/container-principal.component';
+import { authGuardFn } from './components/guard/auth-fn.guard';
 
 const routes: Routes = [
   { path: '', redirectTo : 'login', pathMatch: 'full' },
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'verifyMail', component: VerifyMailComponent },
   { path: 'recoverPassword', component: RecoverPasswordComponent },
-  { path: 'containerPrincipal', component: ContainerPrincipalComponent },
+  { path: 'containerPrincipal', canActivate: [authGuardFn] ,component: ContainerPrincipalComponent },
   { path: '**', redirectTo : 'login', pathMatch: 'full' }
 ];
 
