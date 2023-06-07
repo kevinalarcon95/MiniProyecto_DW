@@ -1,3 +1,4 @@
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 //Modulos
@@ -25,6 +26,7 @@ import { DataServices } from './data.services';
 import { ProviderComponent } from './components/provider/provider.component';
 import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
 import { ListProviderComponent } from './components/provider/list-provider/list-provider.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -54,8 +56,9 @@ import { ListProviderComponent } from './components/provider/list-provider/list-
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    HttpClientModule
   ],
-  providers: [DataServices],
+  providers: [DataServices, BsModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
