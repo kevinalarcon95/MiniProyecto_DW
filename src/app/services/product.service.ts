@@ -22,19 +22,15 @@ export class ProductService {
   }
 
   agregarProduct(product: Product[]): Observable<any>{
-    // console.log("agregamos product: " + product.toString());
-    // if(this.product == null){
-    //   this.product = [];
-    // }
     this.product = product;
     return this.dataService.guardarProduct(this.product);
   }
 
   editarProducto(index:number,product: Product): Observable<any>{
-    //TODO: Hacer
-    //let producto = this.product[index];
-
     return this.dataService.editarProduct(index,product);
   }
 
+  eliminarProducto(index:number): Observable<any>{
+    return this.dataService.eliminarProducto(index);
+  }
 }

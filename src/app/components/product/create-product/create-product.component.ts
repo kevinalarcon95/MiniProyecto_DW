@@ -1,6 +1,6 @@
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Provider, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/model/product.model';
 
@@ -12,10 +12,12 @@ import { Product } from 'src/app/model/product.model';
 export class CreateProductComponent implements OnInit {
 
   @Input() productoEdit: Product;
+  @Input() index: number;
   @Output() nuevoProducto: EventEmitter<Product> = new EventEmitter<Product>();
 
   formProducto: FormGroup;
   producto: Product;
+  proveedores: Provider[] = [];
   fecha: Date = new Date();
 
   constructor(
@@ -31,7 +33,6 @@ export class CreateProductComponent implements OnInit {
   }
   ngOnInit(): void {
     if(!!this.productoEdit){
-      console.log(this.productoEdit)
       this.datosProducto();
     }
   }
@@ -73,4 +74,10 @@ export class CreateProductComponent implements OnInit {
   }
 
   closeModal = () => this.bsModalService.hide();
+
+  @HostListener('document: eventProviderProduct', ['$event.detail'])
+  cargarProvider(proveedores: Provider[]){
+    this.proveedores = proveedores;
+    console.log(this.proveedores);
+  }
 }

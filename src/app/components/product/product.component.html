@@ -12,8 +12,8 @@
         </div>
     </div>
     <div class="row">
-        <app-list-product
-                          (deleteProduct)="eliminarProducto()"></app-list-product>
+        <app-list-product (editProduct)="editarProducto($event)" (indexProduct)="setIndex($event)"
+                          (deleteProduct)="eliminarProducto($event)"></app-list-product>
     </div>
 </div>
 

@@ -18,6 +18,8 @@ export class ProductComponent implements OnInit{
     class: 'modal-md',
     ignoreBackdropClick: true,
   };
+  indexProductoEditar: number;
+
   constructor(private ProductService: ProductService,
               private router: Router,
               private bsModalService: BsModalService){}
@@ -38,20 +40,24 @@ export class ProductComponent implements OnInit{
   recibeProducto(producto: Product){
     this.productos.push(producto);
     this.ProductService.agregarProduct(this.productos).subscribe(data =>{
-      console.log('data',data)
       this.enviarProductos();
     })
   }
 
-  editarProducto(index:number, producto: Product){
-    //TODO: editarProducto
-    this.ProductService.editarProducto(index,producto).subscribe(data => {
+  editarProducto(producto: Product){
+    this.ProductService.editarProducto(this.indexProductoEditar,producto).subscribe(data => {
       this.enviarProductos();
-    })
+    });
   }
 
-  eliminarProducto(){
-    //TODO: endpoint
+  setIndex(index: number){
+    this.indexProductoEditar = index;
+  }
+
+  eliminarProducto(index: any){
+    this.ProductService.eliminarProducto(index).subscribe(data =>{
+      this.enviarProductos();
+    })
   }
 
   enviarProductos(){
@@ -68,5 +74,4 @@ export class ProductComponent implements OnInit{
     const eventProductos = this.productos;
     document.dispatchEvent(new CustomEvent('eventProductos', {detail: eventProductos}));
   }
-
 }

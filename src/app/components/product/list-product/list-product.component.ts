@@ -1,5 +1,5 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Component, EventEmitter, HostListener, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output, Provider, TemplateRef } from '@angular/core';
 import { Product } from 'src/app/model/product.model';
 
 @Component({
@@ -10,7 +10,8 @@ import { Product } from 'src/app/model/product.model';
 export class ListProductComponent implements OnInit {
 
   @Output() editProduct: EventEmitter<Product> = new EventEmitter<Product>();
-  @Output() deleteProduct: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() indexProduct: EventEmitter<number> = new EventEmitter<number>();
+  @Output() deleteProduct: EventEmitter<number> = new EventEmitter<number>();
 
   productos: Product[] = [];
   productoEditar: Product;
@@ -36,18 +37,18 @@ export class ListProductComponent implements OnInit {
     this.productos = evt.detail;
   }
 
-  openModalProducto(producto: TemplateRef<any>, productoEditar: Product): void{
+  openModalProducto(producto: TemplateRef<any>, productoEditar: Product, index: number): void{
     this.productoEditar = productoEditar;
+    this.indexProducto = index;
     this.productoRef = this.bsModalService.show(producto, this.configBackdrop);
-    console.log("producto a editar", this.productoEditar);
   }
 
   enviarProductoEditado(producto: Product){
+    this.indexProduct.emit(this.indexProducto);
     this.editProduct.emit(producto);
   }
 
-  eliminarProducto(){
-    this.deleteProduct.emit(true);
+  eliminarProducto(indexProduct: number){
+    this.deleteProduct.emit(indexProduct);
   }
-
 }
