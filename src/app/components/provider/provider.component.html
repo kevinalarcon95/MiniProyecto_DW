@@ -11,7 +11,8 @@
         </button>
    </div>
    <div class="row">
-    <app-list-provider></app-list-provider>
+    <app-list-provider (editProvider)="editarProveedor($event)" (indexProvider)="setIndex($event)"
+                        (deleteProvider)="eliminarProveedor($event)"></app-list-provider>
 </div>
   </div>
   <ng-template #crearProveedor>
