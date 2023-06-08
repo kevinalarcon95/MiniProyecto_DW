@@ -56,7 +56,10 @@ export class ProductComponent implements OnInit{
 
   eliminarProducto(index: any){
     this.ProductService.eliminarProducto(index).subscribe(data =>{
-      this.enviarProductos();
+      this.productos.splice(index, 1);
+      this.ProductService.agregarProduct(this.productos).subscribe(productos => {
+        this.enviarProductos();
+      })
     })
   }
 

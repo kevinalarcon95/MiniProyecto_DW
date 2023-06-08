@@ -25,7 +25,7 @@ export class CreateProviderComponent implements OnInit{
   ){
     this.formProveedor = this.fb.group({
       nombreProveedor: ['', Validators.required],
-      fecha: ['', Validators.required]
+      fechaCreacion: ['', Validators.required]
     })
   }
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class CreateProviderComponent implements OnInit{
 datosProveedor(){
   this.formProveedor.patchValue({
     nombreProveedor: this.preveedorEdit.nombre,
-    fechaIngreso: this.preveedorEdit.fechaCreacion
+    fechaCreacion: this.preveedorEdit.fechaCreacion
   })
 }
   crearProveedor(){
@@ -49,8 +49,8 @@ datosProveedor(){
 
   obtenerDatos(){
     const nombreProveedor = this.formProveedor.value.nombreProveedor;
-    const fecha = this.formProveedor.value.fecha;
-    this.proveedor = new Provider(nombreProveedor,fecha);
+    const fechaCreacion = this.formProveedor.value.fechaCreacion;
+    this.proveedor = new Provider(nombreProveedor,fechaCreacion);
   }
   editarProducto(){
     this.obtenerDatos();
