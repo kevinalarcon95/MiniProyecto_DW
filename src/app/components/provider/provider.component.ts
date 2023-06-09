@@ -57,7 +57,10 @@ export class ProviderComponent implements OnInit {
 
   eliminarProveedor(index: any){
     this.ProviderService.eliminarProvider(index).subscribe(data =>{
-      this.enviarProveedores();
+      this.proveedores.splice(index, 1);
+      this.ProviderService.agrgarProvider(this.proveedores).subscribe(proveedores => {
+        this.enviarProveedores();
+      })
     })
   }
   enviarProveedores(){
