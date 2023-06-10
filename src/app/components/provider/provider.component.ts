@@ -30,6 +30,7 @@ export class ProviderComponent implements OnInit {
   ngOnInit(): void {
     this.enviarProveedores();
   }
+  
   irAgregar(){
     console.log("agrgar");
     this.router.navigate(['/containerPrincipal'],{queryParams:{modoEdicion:0}});
@@ -63,6 +64,7 @@ export class ProviderComponent implements OnInit {
       })
     })
   }
+  
   enviarProveedores(){
     this.ProviderService.obtenerProvider()
     .subscribe(

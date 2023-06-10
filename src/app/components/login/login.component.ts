@@ -13,6 +13,7 @@ import { TokenService } from 'src/app/services/token/token.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+
   loginUsuario: FormGroup;
   loading: boolean = false;
 
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(correoElectronico,contrasena).then((user) =>{
         if (user?.emailVerified) {
           this.token.saveResponse(JSON.stringify(user));
+          this.token.saveEmail(user.email);
           user.getIdToken().then(data =>{
             this.token.saveToken(JSON.stringify(data)); 
             this.router.navigate(['/containerPrincipal']);          
@@ -50,6 +52,5 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         this.toastr.error(this.firebaseError.codeError(error.code), 'Error');
       });
-  
   }
 }

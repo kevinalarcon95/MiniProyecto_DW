@@ -11,17 +11,16 @@ import { TokenService } from 'src/app/services/token/token.service';
 })
 export class NavbarComponent implements OnInit{
 
-  dataUser: any;
+  emailUser: string;
   status: boolean = false;
   receivedName: string = '';
 
   constructor(private afAuth: AngularFireAuth, private Router: Router, private auth: AuthService, private token: TokenService){}
 
   ngOnInit(): void {
+    this.emailUser = this.token.getEmail();
     this.afAuth.currentUser.then(user => {
       if (user && user.emailVerified){
-        this.dataUser = user;
-        console.log(user);
         this.clickEvent();
       }
     })

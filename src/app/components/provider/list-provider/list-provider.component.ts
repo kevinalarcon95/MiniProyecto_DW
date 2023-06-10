@@ -1,6 +1,7 @@
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Provider } from './../../../model/provider.model';
 import { Component, EventEmitter, HostListener, OnInit, Output, TemplateRef } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-provider',
@@ -8,14 +9,15 @@ import { Component, EventEmitter, HostListener, OnInit, Output, TemplateRef } fr
   styleUrls: ['./list-provider.component.css']
 })
 export class ListProviderComponent implements OnInit{
+
   @Output() editProvider: EventEmitter<Provider> = new EventEmitter<Provider>();
   @Output() indexProvider: EventEmitter<number> = new EventEmitter<number>();
   @Output() deleteProvider: EventEmitter<number> = new EventEmitter<number>();
 
-
   proveedor: Provider[] = [];
   proveedorEditar: Provider;
   indexProveedor: number;
+  botonSeleccionadoEditar: string;
 
   proveedorRef: BsModalRef;
   configBackdrop = {
@@ -26,18 +28,16 @@ export class ListProviderComponent implements OnInit{
     ignoreBackdropClick: true,
   }
   constructor(
-    private bsModalService: BsModalService){}
-  ngOnInit(): void {
-  }
+    private bsModalService: BsModalService,
+    private toastr: ToastrService){}
+
+  ngOnInit(): void {}
 
   @HostListener('document: eventProvider', ['$event'])
   cargarProvider(evt: any){
     this.proveedor = evt.detail;
   }
 
-  despachaProveedoresProductos(){
-    document.dispatchEvent(new CustomEvent('eventProviderProduct', {detail: this.proveedor}));
-  }
   openModalProvider(provider: TemplateRef<any>, proveedorEditar: Provider, index: number): void{
     this.proveedorEditar = proveedorEditar;
     this.indexProveedor = index;
@@ -48,7 +48,14 @@ export class ListProviderComponent implements OnInit{
     this.indexProvider.emit(this.indexProveedor);
     this.editProvider.emit(proveedor);
   }
+
   eliminarProveedor(indexProvider: number){
-    this.deleteProvider.emit(indexProvider);
+    const confirmation = window.confirm('¿Estás seguro de eliminar el producto?');
+    if (confirmation) {
+      this.deleteProvider.emit(indexProvider);
+      this.toastr.success('El proveedor ha sido eliminado', 'Operación exitosa');
+    } else {
+      this.toastr.warning('La eliminación del proveedor ha sido cancelada', 'Operación cancelada');
+    }
   }
 }

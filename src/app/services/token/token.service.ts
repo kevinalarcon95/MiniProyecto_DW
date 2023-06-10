@@ -17,6 +17,14 @@ export class TokenService {
     sessionStorage.setItem("token",token);
   }
 
+  saveEmail(email: string){
+    sessionStorage.setItem("email", email);
+  }
+
+  getEmail(): string | null{
+    return sessionStorage.getItem('email');
+  }
+
   getToken(): string | null {
     return sessionStorage.getItem('token');
   }

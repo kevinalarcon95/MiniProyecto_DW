@@ -22,6 +22,5 @@ export class SidebarComponent implements OnInit {
   onSelectOption(option: string) {
     this.selectedOption = option;
     this.optionSelected.emit(option);
-    console.log(this.selectedOption);
   }
 }

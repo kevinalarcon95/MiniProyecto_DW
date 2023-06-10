@@ -1,6 +1,8 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, EventEmitter, HostListener, OnInit, Output, Provider, TemplateRef } from '@angular/core';
 import { Product } from 'src/app/model/product.model';
+import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-product',
@@ -27,7 +29,8 @@ export class ListProductComponent implements OnInit {
   };
 
   constructor(
-    private bsModalService: BsModalService){}
+    private bsModalService: BsModalService,
+    private toastr: ToastrService){}
 
   ngOnInit(): void {
   }
@@ -48,7 +51,17 @@ export class ListProductComponent implements OnInit {
     this.editProduct.emit(producto);
   }
 
-  eliminarProducto(indexProduct: number){
-    this.deleteProduct.emit(indexProduct);
+  // eliminarProducto(indexProduct: number){
+  //   this.deleteProduct.emit(indexProduct);
+  // }
+
+  eliminarProducto(indexProduct: number) {
+    const confirmation = window.confirm('¿Estás seguro de eliminar el producto?');
+    if (confirmation) {
+      this.deleteProduct.emit(indexProduct);
+      this.toastr.success('El producto ha sido eliminado', 'Operación exitosa');
+    } else {
+      this.toastr.warning('La eliminación del producto ha sido cancelada', 'Operación cancelada');
+    }
   }
 }

@@ -1,8 +1,11 @@
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { Component, OnInit, Output, EventEmitter, Input, Provider, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, HostListener } from '@angular/core';
+import { Provider } from 'src/app/model/provider.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/model/product.model';
+import { ProviderService } from 'src/app/services/provider.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-product',
@@ -19,10 +22,13 @@ export class CreateProductComponent implements OnInit {
   producto: Product;
   proveedores: Provider[] = [];
   fecha: Date = new Date();
+  nombreModal: string = 'Crear';
 
   constructor(
     private fb: FormBuilder,
-    private bsModalService: BsModalService
+    private bsModalService: BsModalService,
+    private providerService: ProviderService,
+    private toastr: ToastrService
   ){
     this.formProducto = this.fb.group({
       nombreProducto: ['', Validators.required],
@@ -32,8 +38,10 @@ export class CreateProductComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+    this.cargarProveedores();
     if(!!this.productoEdit){
       this.datosProducto();
+      this.cargarNombreModal();
     }
   }
 
@@ -51,6 +59,7 @@ export class CreateProductComponent implements OnInit {
     this.nuevoProducto.emit(this.producto);
     this.clear();
     this.closeModal();
+    this.toastr.success('Se creó correctamente el producto','Operacion exitosa');
   }
 
   obtenerDatos(){
@@ -63,9 +72,10 @@ export class CreateProductComponent implements OnInit {
 
   editarProducto(){
     this.obtenerDatos();
-    this.nuevoProducto.emit(this.productoEdit);
+    this.nuevoProducto.emit(this.producto);
     this.clear();
     this.closeModal();
+    this.toastr.success('Se editó correctamente el producto','Operacion exitosa');
   }
 
   clear(){
@@ -75,9 +85,15 @@ export class CreateProductComponent implements OnInit {
 
   closeModal = () => this.bsModalService.hide();
 
-  @HostListener('document: eventProviderProduct', ['$event.detail'])
-  cargarProvider(proveedores: Provider[]){
-    this.proveedores = proveedores;
-    console.log(this.proveedores);
+  cargarProveedores(){
+    this.providerService.obtenerProvider().subscribe(data =>{
+      !!data ? this.proveedores = data : this.proveedores = [];
+    });
+  }
+
+cargarNombreModal(){
+  if(this.productoEdit != undefined){
+    this.nombreModal = 'Editar';
   }
+}
 }
