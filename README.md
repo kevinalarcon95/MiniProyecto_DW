@@ -1,27 +1,32 @@
-# MiniProyectoDW
+# MiniProyecto Electiva Desarrollo Web | Universidad del Cauca
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
+Este proyecto está generado en angular 16.0.1, se implemento un CRUD y la autenticaión haciendo una conexión remota con Firebase, adicionalmente se realizó un maquetado con bootstrap 5 y modificación de estilos con CSS3, para el instalador de paquetes se usó `yarn`. En caso de querer clonar el proyecto se debe tener en cuenta los siguientes consideraciones:
 
-## Development server
+- Tener instalado NodeJs  
+- Instalar Cli mayor o igual a 15.1.0
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Luego de instalar NodeJs y Cli, ejecute el comando `yarn install`.
 
-## Code scaffolding
+## Servidor de desarrollo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambia alguno de los archivos de origen.
 
-## Build
+# Para su interés
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Durante el desarrollo del proyecto se ejecutaron diferentes comandos por consola, los cuales ayudaron a acortar procesos, a continuación se muestran los más relevantes: 
 
-## Running unit tests
+## Creación de componentes
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Ejecute `ng generate component nombre-componente` para generar un nuevo componente. 
 
-## Running end-to-end tests
+## Creación de servicios
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Ejecute `ng generate service nombre-componente` para generar un nuevo componente. 
 
-## Further help
+#
+### Facultad de Ingeniería Electronica y Telecomunicaciones | Programa de Ingeniería de Sistemas
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Desarrollado por:
+- Kevin Fernando Alarcón Camayo 
+- Michel Andrea Gutierrez Vallejo  
+
