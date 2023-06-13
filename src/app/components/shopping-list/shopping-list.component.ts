@@ -28,11 +28,11 @@ export class ShoppingListComponent {
 
   ngOnInit() {
     this.obtenerListaProductos();
-    if(this.token.getProductSelected()){
-      this.cargarListaProductos(); // Carga la lista de productos que esta el sessionStorage en listaProductos, en esta lista vienen productos repetidos
-      this.listaComprasAux2 = this.contarProductos(); // Arma de manera ordenada la lista con los productos, su cantidad y un estado( false)
-      //this.guardarListaProductosBD(this.listaComprasAux); //Guarda esa lista en la base de datos
-    }
+    // if(this.token.getProductSelected()){
+    //   this.cargarListaProductos(); // Carga la lista de productos que esta el sessionStorage en listaProductos, en esta lista vienen productos repetidos
+    //   this.listaComprasAux2 = this.contarProductos(); // Arma de manera ordenada la lista con los productos, su cantidad y un estado( false)
+    //   //this.guardarListaProductosBD(this.listaComprasAux); //Guarda esa lista en la base de datos
+    // }
   }
 
   cargarListaProductos() {
@@ -65,7 +65,7 @@ export class ShoppingListComponent {
     for (const clave in contadorProductos) {
       if (contadorProductos.hasOwnProperty(clave)) {
         const [nombre, precio, proveedor, fechaCreacion] = clave.split('-');
-        const producto: Product = {nombre: nombre, precio: parseFloat(precio), proveedor: proveedor, fechaCreacion: new Date(fechaCreacion)};
+        const producto: Product = new Product(nombre,parseFloat(precio),proveedor,new Date(fechaCreacion)); 
         const cantidad = contadorProductos[clave];
         const estado = false;
         producto2 = new Productos(producto, cantidad, estado);
@@ -100,24 +100,35 @@ export class ShoppingListComponent {
   obtenerListaProductos(){
     this.email = this.token.getEmail().split('@');
     this.sLService.obtenerListaCompras(this.email[0]).subscribe((data: Productos[]) =>{
-      if(data){
-        this.listaComprasAux = data;
-        this.listaComprasAux3 = this.verificarCantidadProductos(this.listaComprasAux,this.listaComprasAux2);
-        this.guardarListaProductosBD(this.listaComprasAux);
-        console.log('Lista 1',this.listaComprasAux);
-        console.log('Lista 2',this.listaComprasAux2);
-        console.log('Lista 3', this.listaComprasAux3);
-      }else{
+      console.log(data);
+      if(data && this.token.getProductSelected()){
         this.cargarListaProductos();
         this.listaComprasAux2 = this.contarProductos();
-        this.guardarListaProductosBD(this.listaComprasAux2);
+        this.listaComprasAux = data.map((item: Productos) => { return new Productos(new Product(item.productos.nombre,item.productos.precio,item.productos.proveedor,new Date(item.productos.fechaCreacion)),item.cantidad,item.estado)});
+        console.log('Lista en sesion',this.listaComprasAux);
+        this.listaComprasAux3 = this.verificarCantidadProductos(this.listaComprasAux,this.listaComprasAux2);
+        this.guardarListaProductosBD(this.listaComprasAux3);
+        this.token.cleanProductSelect();
+        this.saldoTotal(this.listaComprasAux3);
+      }else if(data){
+        this.listaComprasAux3 = data;
+        this.saldoTotal(this.listaComprasAux3);
+      }else if(this.token.getProductSelected()){
+        this.cargarListaProductos();
+        this.listaComprasAux3 = this.contarProductos();
+        this.saldoTotal(this.listaComprasAux3);
+        this.guardarListaProductosBD(this.listaComprasAux3);
+        this.token.cleanProductSelect();
       }
     });
   }
 
-  saldoTotal(){
-    for (const producto of this.listaComprasAux) {
-      this.total += producto.productos.precio;
+  saldoTotal(lista: Productos[]){
+    this.total = 0;
+    for (const producto of lista) {
+      if(!producto.estado){
+        this.total += producto.productos.precio * producto.cantidad;
+      }
     }
   }
 
@@ -127,20 +138,21 @@ export class ShoppingListComponent {
       : this.total + item.productos.precio * item.cantidad;
   }
 
+  //Lista 1: Viene de BD
   verificarCantidadProductos(lista1: Productos[], lista2: Productos[]): Productos[]{
-    let lista: Productos[];
-    for(let i=0;i<lista2.length;i++){
-      for(let j=0;j<lista1.length;j++){
-        console.log('Lista 1',lista1[i].productos);
-        console.log('Lista 2',lista2[i].productos);
-        if(lista1[i].productos === lista2[j].productos){
-          console.log('entré');
-            lista[i].cantidad = lista2[i].cantidad + lista1[j].cantidad;
-        }
+    lista1.forEach(data => {
+      let productoExiste = lista2.find(item => item.productos.nombre === data.productos.nombre);
+      if(productoExiste != undefined){
+        data.cantidad = data.cantidad + productoExiste.cantidad;
       }
-    }
-    return lista;
-    
+    });
+
+    lista2.forEach(data => {
+      let productoExiste = lista1.find(item => item.productos.nombre === data.productos.nombre);
+      productoExiste == undefined ? lista1.push(data): null;
+    });
+    console.log(lista1);
+    return lista1;
   }
   
 }

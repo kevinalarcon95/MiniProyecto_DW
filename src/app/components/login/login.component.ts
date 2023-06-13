@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         }
       }) .catch((error) => {
         this.loading = false;
-        this.toastr.error(this.firebaseError.codeError(error.code), 'Error');
+        this.toastr.info(this.firebaseError.codeError(error.code), 'Inicio de sesion');
       });
   }
 }

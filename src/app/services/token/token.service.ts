@@ -44,5 +44,7 @@ export class TokenService {
     return sessionStorage.getItem('productoSeleccionado');
   }
 
-  
+  cleanProductSelect(){
+    sessionStorage.setItem('productoSeleccionado', '');
+  }
 }
