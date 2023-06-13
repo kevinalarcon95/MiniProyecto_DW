@@ -7,6 +7,7 @@ import { VerifyMailComponent } from './components/verify-mail/verify-mail.compon
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { ContainerPrincipalComponent } from './components/container-principal/container-principal.component';
 import { authGuardFn } from './components/guard/auth-fn.guard';
+import { ProductComponent } from './components/product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo : 'login', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'verifyMail', component: VerifyMailComponent },
   { path: 'recoverPassword', component: RecoverPasswordComponent },
   { path: 'containerPrincipal', canActivate: [authGuardFn] ,component: ContainerPrincipalComponent },
+  { path: 'listaProductos', canActivate: [authGuardFn] ,component: ProductComponent },
   { path: '**', redirectTo : 'login', pathMatch: 'full' }
 ];
 

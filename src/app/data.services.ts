@@ -1,8 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import { Product } from './model/product.model';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of, switchMap } from 'rxjs';
 import { Provider } from './model/provider.model';
+import { Carrito } from './model/carrito.model';
+import { Productos } from './model/products.model';
 
 @Injectable()
 export class DataServices{
@@ -44,10 +46,25 @@ export class DataServices{
       url = 'https://lista-compras-1256b-default-rtdb.firebaseio.com/proveedores/' + index + '.json';
       return this.httpClient.put<any>(url, provider);
     }
+    //Elimina proveedor
     eliminarProvider(index: number): Observable<any>{
       let url: string;
       url = 'https://lista-compras-1256b-default-rtdb.firebaseio.com/proveedores/' + index + '.json';
       return this.httpClient.delete<any>(url);
+    }
+    //Guardar listaCompras
+    guardarListaCompras(productos: Productos[], email: string):Observable<any>{
+      return this.httpClient.put<any>('https://lista-compras-1256b-default-rtdb.firebaseio.com/listaProductos/'+email+'.json', productos);
+    }
+    //Obtiene la Lista de compras
+    cargarListaCompras(email: string): Observable<Productos[]>{
+      return this.httpClient.get<Productos[]>('https://lista-compras-1256b-default-rtdb.firebaseio.com/listaProductos/'+email+'.json');
+    }
+
+    editarCantidadProducto(index:number, producto: Carrito): Observable<any>{
+      let url: string;
+      url = 'https://lista-compras-1256b-default-rtdb.firebaseio.com/listaCompras/' + index + '.json';
+      return this.httpClient.put<any>(url, producto);
     }
 
 }

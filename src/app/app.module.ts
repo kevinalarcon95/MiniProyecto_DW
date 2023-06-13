@@ -27,6 +27,7 @@ import { ProviderComponent } from './components/provider/provider.component';
 import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
 import { ListProviderComponent } from './components/provider/list-provider/list-provider.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 
 
 
@@ -48,6 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
     ProviderComponent,
     CreateProviderComponent,
     ListProviderComponent,
+    ShoppingListComponent,
   ],
   imports: [
     BrowserModule,

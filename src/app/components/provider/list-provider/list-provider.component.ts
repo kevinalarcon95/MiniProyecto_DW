@@ -17,7 +17,6 @@ export class ListProviderComponent implements OnInit{
   proveedor: Provider[] = [];
   proveedorEditar: Provider;
   indexProveedor: number;
-  botonSeleccionadoEditar: string;
 
   proveedorRef: BsModalRef;
   configBackdrop = {
@@ -58,4 +57,5 @@ export class ListProviderComponent implements OnInit{
       this.toastr.warning('La eliminación del proveedor ha sido cancelada', 'Operación cancelada');
     }
   }
+
 }

@@ -1,8 +1,9 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Component, EventEmitter, HostListener, OnInit, Output, Provider, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output, Provider, TemplateRef, inject } from '@angular/core';
 import { Product } from 'src/app/model/product.model';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs/operators';
+import { Carrito } from 'src/app/model/carrito.model';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-list-product',
@@ -16,9 +17,10 @@ export class ListProductComponent implements OnInit {
   @Output() deleteProduct: EventEmitter<number> = new EventEmitter<number>();
 
   productos: Product[] = [];
+  listaProductos: Product[] = [];
+  itemCarrito: Carrito;
   productoEditar: Product;
   indexProducto:number;
-
   productoRef: BsModalRef;
   configBackdrop = {
     animated: true,
@@ -30,7 +32,8 @@ export class ListProductComponent implements OnInit {
 
   constructor(
     private bsModalService: BsModalService,
-    private toastr: ToastrService){}
+    private toastr: ToastrService,
+    private token: TokenService){}
 
   ngOnInit(): void {
   }
@@ -51,10 +54,6 @@ export class ListProductComponent implements OnInit {
     this.editProduct.emit(producto);
   }
 
-  // eliminarProducto(indexProduct: number){
-  //   this.deleteProduct.emit(indexProduct);
-  // }
-
   eliminarProducto(indexProduct: number) {
     const confirmation = window.confirm('¿Estás seguro de eliminar el producto?');
     if (confirmation) {
@@ -64,4 +63,10 @@ export class ListProductComponent implements OnInit {
       this.toastr.warning('La eliminación del producto ha sido cancelada', 'Operación cancelada');
     }
   }
+
+  enviarProductoSeleccionado(producto: Product){
+    this.listaProductos.push(producto);
+    this.token.saveProductSelected(JSON.stringify(this.listaProductos));
+    this.toastr.success('Se agregó '+ producto.nombre + ' a la lista de compras','Operacion exitosa',{ positionClass: 'toast-top-center'});
+  }  
 }

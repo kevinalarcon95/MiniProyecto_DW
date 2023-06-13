@@ -1,10 +1,10 @@
-<div class="d-flex bg-light no-oblicuas" id="wrapper">
+<div class="d-flex bg-light no-oblicuas" >
     <app-sidebar (optionSelected)="onOptionSelected($event)"></app-sidebar>
     <div id="page-content-wrapper">
       <app-navbar></app-navbar>
       <div [ngSwitch]="receivedOption">
         <div *ngSwitchCase="'Option 1'">
-          <h2>Vista para la opción 1 usando ngSwitch</h2>
+          <app-shopping-list></app-shopping-list>
         </div>
         <div class="container-fluid" *ngSwitchCase="'Option 2'">
           <app-product></app-product>
@@ -13,7 +13,7 @@
           <app-provider></app-provider>
         </div>
         <div *ngSwitchDefault>
-          <app-product></app-product>
+          <app-shopping-list></app-shopping-list>
         </div>
     </div>
   </div>

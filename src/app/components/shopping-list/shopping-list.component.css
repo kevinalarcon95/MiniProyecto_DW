@@ -1,0 +1,22 @@
+.container .row:nth-child(2){
+    box-shadow: 0px 1px 5px 0px rgba(148,148,148,.3);
+}
+
+
+th{
+    color: #A2A2A2;
+}
+
+td{
+    color: #4C5751;
+}
+
+.table th, td{
+    text-align: center;
+}
+
+.celda{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

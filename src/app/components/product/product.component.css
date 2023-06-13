@@ -1,7 +1,3 @@
-.container{
-    padding-right: calc(var(--bs-gutter-x) * 2.5);
-}
-
 .col > .btn{
     color: #585652;
     font-size: 14px;

@@ -34,7 +34,6 @@ export class NavbarComponent implements OnInit{
   clickEvent() {
     this.status = !this.status;
     document.dispatchEvent(new CustomEvent('statusChange', { detail: this.status }));
-    console.log(this.status);
   }
 
   @HostListener('document:nameSelected', ['$event.detail'])

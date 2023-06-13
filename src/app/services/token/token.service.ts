@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +10,10 @@ export class TokenService {
 
   saveResponse(response: string){
     sessionStorage.setItem("userLogged", response);
+  }
+
+  getResponse(){
+    return sessionStorage.getItem('userLogged');
   }
 
   saveToken(token: string) {
@@ -32,4 +35,14 @@ export class TokenService {
   clearToken() {
     sessionStorage.clear()
   }
+
+  saveProductSelected(producto: string){
+    return sessionStorage.setItem('productoSeleccionado',producto);
+  }
+
+  getProductSelected(){
+    return sessionStorage.getItem('productoSeleccionado');
+  }
+
+  
 }
